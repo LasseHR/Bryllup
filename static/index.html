@@ -222,6 +222,10 @@
   }
   .nav-btn:hover { background: var(--gold); }
 
+  .filter-gold {
+    filter: invert(82%) sepia(3%) saturate(4734%) hue-rotate(345deg) brightness(76%) contrast(87%);
+  }
+
   /* ── CARD 5: PROGRAM ── */
   #card-program { background: var(--beige-1); }
   .program-bg {
@@ -476,31 +480,8 @@
     </div>
   </section>
 
-  <!-- CARD 3 — COUNTDOWN -->
-  <section class="card" id="card-countdown">
-    <div class="countdown-bg"></div>
-    <div class="countdown-label reveal">Vi ses om</div>
-    <div class="countdown-grid">
-      <div class="count-cell reveal reveal-delay-1">
-        <div class="count-number" id="cd-days">000</div>
-        <div class="count-unit">Dage</div>
-      </div>
-      <div class="count-cell reveal reveal-delay-2">
-        <div class="count-number" id="cd-hours">00</div>
-        <div class="count-unit">Timer</div>
-      </div>
-      <div class="count-cell reveal reveal-delay-3">
-        <div class="count-number" id="cd-minutes">00</div>
-        <div class="count-unit">Minutter</div>
-      </div>
-      <div class="count-cell reveal reveal-delay-4">
-        <div class="count-number" id="cd-seconds">00</div>
-        <div class="count-unit">Sekunder</div>
-      </div>
-    </div>
-  </section>
 
-  <!-- CARD 4 — LOCATION -->
+  <!-- CARD 3 — LOCATION -->
   <section class="card" id="card-location">
     <div class="location-bg"></div>
     <div class="card-inner">
@@ -524,11 +505,7 @@
       </div>
       <div class="location-card reveal reveal-delay-3">
         <div class="loc-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#b8956a" stroke-width="1.5">
-            <rect x="2" y="7" width="20" height="14" rx="2"/>
-            <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
-            <line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/>
-          </svg>
+            <img src="disco-ball-disco-svgrepo-com.svg" class="filter-gold" alt="Location icon" style="width: 16px; height: 16px;">
         </div>
         <div class="loc-info">
           <h3>Studie Köter  </h3>
@@ -542,7 +519,7 @@
     </div>
   </section>
 
-  <!-- CARD 5 — PROGRAM -->
+  <!-- CARD 4 — PROGRAM -->
   <section class="card" id="card-program">
     <div class="program-bg"></div>
     <div class="card-inner">
@@ -554,7 +531,7 @@
           <div class="prog-dot"></div>
           <div class="prog-content">
             <div style="display:flex;justify-content:space-between;align-items:center">
-              <div class="prog-event">Ankomst</div>
+              <div class="prog-event">Ankomst til kirken</div>
               <div class="prog-time">14:15</div>
             </div>
           </div>
@@ -564,7 +541,7 @@
           <div class="prog-dot main"></div>
           <div class="prog-content">
             <div style="display:flex;justify-content:space-between;align-items:center">
-              <div class="prog-event">Vielse</div>
+              <div class="prog-event">Vielse starter</div>
               <div class="prog-time">14:30</div>
             </div>
           </div>
@@ -647,11 +624,7 @@
       </div>
     </div>
   </section>
-  <!-- ═══════════════════════════════════════════════════════
-     HAPPENINGS CARD
-     Insert this <section> block into the main invitation
-     between card-program and card-qa (or wherever fits).
-  ═══════════════════════════════════════════════════════ -->
+  <!-- CARD 5 — HAPPENINGS -->
   <section class="card" id="card-happenings">
     <div class="happenings-bg"></div>
     <div class="card-inner">
@@ -662,8 +635,8 @@
 
       <!-- Intro -->
       <div class="happenings-intro reveal reveal-delay-2">
-        <p>Har man ideer til sange, leje eller andre sjove indslag er man mere end velkommen til at arrangere det.
-           Man er også velkommen til at holde en tale så længe det kan gøres enten kort eller underholdende.</p>
+        <p>Har I lyst til at lave et indslag, er I mere end velkommen til at koordinere det med vores toastmaster Rune (Simones bror).
+           Taler er også velkomne, så længe de kan gøres enten korte eller underholdende.</p>
       </div>
 
       <div class="qa-item reveal reveal-delay-4">
@@ -676,14 +649,14 @@
         </div>
         <div class="tile-text">
           <h4>Toastmaster</h4>
-          <p>Rune er toastmaster og styre slagets gang.</p>
-          <p>Tlf.:<span style="color:var(--gold)">30298862</span> E-mail.:<span style="color:var(--gold)">Rune@gmail.com</span></p>
+          <p>Rune styrer slagets gang.</p>
+          <p>E-mail:<span style="color:var(--gold)"> Rune@gmail.com</span></p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CARD 7 — FAQ -->
+  <!-- CARD 6 — FAQ -->
   <section class="card" id="card-qa">
     <div class="qa-bg"></div>
     <div class="card-inner">
@@ -702,6 +675,17 @@
             <a href="https://onskeskyen.dk/s/en34af" target="_blank" rel="noopener noreferrer" class="wishlist-btn">Se ønskeskyen →</a>
           </div>
         </div>
+
+        <div class="qa-item reveal reveal-delay-3">
+          <div class="qa-icon">
+            <img src="clothes-hanger-svgrepo-com.svg" class="filter-gold" alt="Dress code icon" style="width: 16px; height: 16px;">
+          </div>
+          <div class="qa-text">
+            <h4>Dresscode</h4>
+            <p>Dress up - gerne i sommer farver.</p>
+          </div>
+        </div>
+
         <div class="qa-item reveal reveal-delay-3">
           <div class="qa-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="#b8956a" stroke-width="1.5">
@@ -716,25 +700,11 @@
         </div>
         <div class="qa-item reveal reveal-delay-5">
           <div class="qa-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#b8956a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <!-- Wheat stalk -->
-              <line x1="12" y1="20" x2="12" y2="8"/>
-              <!-- Grain clusters left -->
-              <path d="M12 16 C10 15 9 13 10 11"/>
-              <path d="M12 13 C10 12 9 10 10 8"/>
-              <!-- Grain clusters right -->
-              <path d="M12 16 C14 15 15 13 14 11"/>
-              <path d="M12 13 C14 12 15 10 14 8"/>
-              <!-- Top grain -->
-              <ellipse cx="12" cy="7" rx="1.5" ry="2.5"/>
-              <!-- Warning circle with slash (allergy indicator) -->
-              <circle cx="18" cy="6" r="3.5"/>
-              <line x1="15.5" y1="3.5" x2="20.5" y2="8.5"/>
-            </svg>
+            <img src="food-fork-svgrepo-com.svg" class="filter-gold" alt="Allergy icon" style="width: 16px; height: 16px;">
           </div>
           <div class="qa-text">
             <h4>Allergener</h4>
-            <p>Kontakt os gerne angående kostbehov og allergener</p>
+            <p>Giv os besked angående kostbehov og allergener.</p>
           </div>
         </div>
         <div class="qa-item reveal reveal-delay-6">
@@ -745,13 +715,37 @@
             </svg>
           </div>
           <div class="qa-text">
-            <h4>SU senest 8. Juni 2026</h4>
+            <h4>SU. senest 8. juni 2026</h4>
             <p>Lasse: <span style="color:var(--gold)">30298862</span></p>
             <p>Simone: <span style="color:var(--gold)">60498246</span></p>
           </div>
         </div>
 
     </div>
+    </div>
+  </section>
+
+  <!-- CARD 7 — COUNTDOWN -->
+  <section class="card" id="card-countdown">
+    <div class="countdown-bg"></div>
+    <div class="countdown-label reveal">Vi ses om</div>
+    <div class="countdown-grid">
+      <div class="count-cell reveal reveal-delay-1">
+        <div class="count-number" id="cd-days">000</div>
+        <div class="count-unit">Dage</div>
+      </div>
+      <div class="count-cell reveal reveal-delay-2">
+        <div class="count-number" id="cd-hours">00</div>
+        <div class="count-unit">Timer</div>
+      </div>
+      <div class="count-cell reveal reveal-delay-3">
+        <div class="count-number" id="cd-minutes">00</div>
+        <div class="count-unit">Minutter</div>
+      </div>
+      <div class="count-cell reveal reveal-delay-4">
+        <div class="count-number" id="cd-seconds">00</div>
+        <div class="count-unit">Sekunder</div>
+      </div>
     </div>
   </section>
 
