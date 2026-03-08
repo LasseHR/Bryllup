@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Simone & Lasse — 08.08.2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --beige-0: #faf7f2;
+    --beige-1: #f4ede2;
+    --beige-2: #ede0ce;
+    --beige-3: #e2d0b8;
+    --gold: #b8956a;
+    --gold-light: #d4b896;
+    --gold-pale: #ecdfc8;
+    --dark: #3a2e26;
+    --mid: #7a6555;
+    --serif: 'Cormorant Garamond', serif;
+    --sans: 'Jost', sans-serif;
+  }
+
+  html, body { height: 100%; overflow: hidden; background: var(--beige-0); }
+
+  .scroll-container {
+    height: 100svh;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+  .scroll-container::-webkit-scrollbar { display: none; }
+
+  .card {
+    height: 100svh;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .divider { display: flex; align-items: center; gap: 16px; margin: 4px 0; opacity: 0.6; }
+  .divider-line { flex: 1; height: 1px; background: var(--gold); }
+  .divider-diamond { width: 6px; height: 6px; background: var(--gold); transform: rotate(45deg); }
+
+  /* ── CARD 1: LANDING ── */
+  #card-landing { background: var(--beige-1); cursor: pointer; }
+
+  .landing-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 70% 60% at 50% 30%, rgba(212,184,150,0.25) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 80% 80%, rgba(184,149,106,0.12) 0%, transparent 60%);
+  }
+
+  .corner { position: absolute; width: 60px; height: 60px; opacity: 0.35; }
+  .corner svg { width: 100%; height: 100%; }
+  .corner-tl { top: 20px; left: 20px; }
+  .corner-tr { top: 20px; right: 20px; transform: scaleX(-1); }
+  .corner-bl { bottom: 20px; left: 20px; transform: scaleY(-1); }
+  .corner-br { bottom: 20px; right: 20px; transform: scale(-1); }
+
+  .landing-content { position: relative; text-align: center; padding: 40px 32px; animation: fadeUp 1.2s ease both; }
+
+  .landing-eyebrow {
+    font-family: var(--sans); font-weight: 200; font-size: 10px;
+    letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px;
+  }
+  .landing-names {
+    font-family: var(--serif); font-size: clamp(52px, 16vw, 88px);
+    font-weight: 300; color: var(--dark); line-height: 0.95;
+  }
+  .landing-names em { font-style: italic; color: var(--gold); }
+  .ampersand { display: block; font-size: 0.55em; color: var(--gold-light); line-height: 1.3; }
+  .landing-date {
+    font-family: var(--sans); font-weight: 200; font-size: 12px;
+    letter-spacing: 0.3em; color: var(--mid); margin-top: 20px;
+  }
+
+  .tap-hint {
+    position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+    font-family: var(--sans); font-weight: 200; font-size: 10px;
+    letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold);
+    opacity: 0; animation: fadeIn 1s ease 2s both;
+    display: flex; flex-direction: column; align-items: center; gap: 8px; white-space: nowrap;
+  }
+  .tap-arrow { animation: bounce 1.8s ease infinite; }
+
+  .ripple {
+    position: absolute; border-radius: 50%; border: 1px solid var(--gold);
+    pointer-events: none; animation: rippleOut 0.9s ease forwards;
+  }
+  @keyframes rippleOut {
+    from { width: 0; height: 0; opacity: 0.7; transform: translate(-50%,-50%); }
+    to   { width: 300px; height: 300px; opacity: 0; transform: translate(-50%,-50%); }
+  }
+
+  /* ── CARD 2: PHOTO ── */
+  #card-photo { background: var(--dark); }
+  .photo-bg {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(to bottom, rgba(58,46,38,0) 40%, rgba(58,46,38,0.9) 100%),
+      url('20250104_165317.jpg') center/cover no-repeat;
+  }
+  .photo-content {
+    position: relative; text-align: center; padding: 0 28px;
+    margin-top: auto; padding-bottom: 52px; width: 100%;
+  }
+  .photo-eyebrow {
+    font-family: var(--sans); font-weight: 200; font-size: 9px;
+    letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 12px;
+  }
+  .photo-names {
+    font-family: var(--serif); font-size: clamp(40px, 13vw, 72px);
+    font-weight: 300; color: #fff; line-height: 1;
+  }
+  .photo-names em { font-style: italic; color: var(--gold-light); }
+  .photo-date-block {
+    display: inline-flex; align-items: center; gap: 16px; margin-top: 16px;
+    background: rgba(255,255,255,0.08); backdrop-filter: blur(8px);
+    border: 1px solid rgba(212,184,150,0.3); border-radius: 40px; padding: 8px 24px;
+  }
+  .photo-date-block span {
+    font-family: var(--sans); font-weight: 200; font-size: 11px;
+    letter-spacing: 0.25em; color: rgba(255,255,255,0.85);
+  }
+  .photo-date-block .dot { width: 4px; height: 4px; background: var(--gold-light); border-radius: 50%; }
+
+  /* ── CARD 3: COUNTDOWN ── */
+  #card-countdown { background: var(--beige-0); }
+  .countdown-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 50% at 50% 0%, rgba(184,149,106,0.15) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 60% at 100% 100%, rgba(212,184,150,0.1) 0%, transparent 50%),
+      url('20250120_164352.jpg') center/cover no-repeat;
+  }
+  .countdown-label {
+    font-family: var(--sans); font-weight: 200; font-size: 10px;
+    letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold);
+    margin-bottom: 32px; position: relative;
+  }
+  .countdown-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+    padding: 0 24px; width: 100%; max-width: 400px; position: relative;
+  }
+  .count-cell {
+    background: #fff; border: 1px solid var(--gold-pale); border-radius: 20px;
+    padding: 28px 16px 22px; text-align: center;
+    box-shadow: 0 4px 24px rgba(184,149,106,0.08);
+    aspect-ratio: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  }
+  .count-number {
+    font-family: var(--serif); font-size: clamp(44px, 14vw, 64px);
+    font-weight: 300; color: var(--dark); line-height: 1; letter-spacing: -0.02em;
+  }
+  .count-unit {
+    font-family: var(--sans); font-weight: 200; font-size: 9px;
+    letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); margin-top: 8px;
+  }
+
+  /* ── CARD 4: LOCATION ── */
+  #card-location { background: var(--beige-2); }
+  .location-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 40% at 30% 70%, rgba(184,149,106,0.12) 0%, transparent 60%);
+  }
+
+  .card-inner {
+    position: relative; width: 100%; max-width: 420px;
+    padding: 0 24px; display: flex; flex-direction: column; gap: 14px;
+  }
+  .section-eyebrow {
+    font-family: var(--sans); font-weight: 200; font-size: 10px;
+    letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); text-align: center;
+  }
+  .section-title {
+    font-family: var(--serif); font-size: clamp(30px, 9vw, 44px);
+    font-weight: 300; color: var(--dark); text-align: center; line-height: 1.1;
+  }
+  .location-card {
+    background: rgba(255,255,255,0.75); backdrop-filter: blur(8px);
+    border: 1px solid rgba(184,149,106,0.2); border-radius: 20px;
+    padding: 20px 22px; display: flex; gap: 16px; align-items: flex-start;
+  }
+  .loc-icon {
+    width: 36px; height: 36px; background: var(--gold-pale); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;
+  }
+  .loc-icon svg { width: 16px; height: 16px; }
+  .loc-info h3 { font-family: var(--serif); font-size: 18px; font-weight: 400; color: var(--dark); margin-bottom: 4px; }
+  .loc-info p  { font-family: var(--sans); font-weight: 300; font-size: 12px; color: var(--mid); line-height: 1.6; }
+  .nav-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--dark); color: #fff; border: none; border-radius: 40px;
+    padding: 8px 16px; font-family: var(--sans); font-weight: 300; font-size: 10px;
+    letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer;
+    text-decoration: none; transition: background 0.2s; margin-top: 10px;
+  }
+  .nav-btn:hover { background: var(--gold); }
+
+  /* ── CARD 5: PROGRAM ── */
+  #card-program { background: var(--beige-1); }
+  .program-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 70% 50% at 70% 20%, rgba(184,149,106,0.13) 0%, transparent 60%);
+  }
+  .program-list { display: flex; flex-direction: column; gap: 0; position: relative; }
+  .program-list::before {
+    content: ''; position: absolute; left: 19px; top: 0; bottom: 0; width: 1px;
+    background: linear-gradient(to bottom, transparent, var(--gold-pale) 15%, var(--gold-pale) 85%, transparent);
+  }
+  .program-item { display: flex; gap: 1px; align-items: flex-start; padding: 3px 0; position: relative; }
+  .prog-dot {
+    width: 10px; height: 10px; border-radius: 50%; background: var(--gold);
+    border: 2px solid var(--beige-1); flex-shrink: 0;
+    position: relative; z-index: 1; margin-left: 15px;
+  }
+  .prog-dot.main { width: 14px; height: 14px; background: var(--dark); margin-left: 13px; }
+  .prog-content {
+    background: rgba(255,255,255,0.6); border: 1px solid rgba(184,149,106,0.15);
+    border-radius: 14px; padding: 8px 10px; flex: 1;
+  }
+  .prog-time {
+    font-family: var(--sans); font-weight: 200; font-size: 9px;
+    letter-spacing: 0.3em; color: var(--gold); text-transform: uppercase; margin-bottom: 3px;
+  }
+  .prog-event { font-family: var(--serif); font-size: 16px; font-weight: 400; color: var(--dark); }
+  .prog-note  { font-family: var(--sans); font-weight: 300; font-size: 11px; color: var(--mid); margin-top: 2px; }
+
+  /* ── CARD 6: FAQ ── */
+  #card-qa { background: var(--beige-0); }
+  .qa-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 20% 30%, rgba(184,149,106,0.1) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 40% at 80% 80%, rgba(212,184,150,0.12) 0%, transparent 50%);
+  }
+  .qa-list { display: flex; flex-direction: column; gap: 10px; }
+  .qa-item {
+    background: rgba(255,255,255,0.7); border: 1px solid rgba(184,149,106,0.18);
+    border-radius: 18px; padding: 14px 18px; display: flex; gap: 14px; align-items: flex-start;
+  }
+  .qa-icon {
+    width: 32px; height: 32px; background: var(--gold-pale); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px;
+  }
+  .qa-icon svg { width: 14px; height: 14px; }
+  .qa-text h4 { font-family: var(--serif); font-size: 16px; font-weight: 400; color: var(--dark); margin-bottom: 3px; }
+  .qa-text p  { font-family: var(--sans); font-weight: 300; font-size: 11.5px; color: var(--mid); line-height: 1.55; }
+  .wishlist-btn {
+    display: inline-flex; align-items: center; gap: 6px; margin-top: 6px;
+    font-family: var(--sans); font-weight: 300; font-size: 11px;
+    letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold);
+    text-decoration: none; border-bottom: 1px solid var(--gold-pale); padding-bottom: 2px;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp  { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+  @keyframes fadeIn  { from { opacity:0; } to { opacity:1; } }
+  @keyframes bounce  { 0%,100% { transform:translateY(0); } 50% { transform:translateY(5px); } }
+
+  .reveal { opacity:0; transform:translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity:1; transform:translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+  .reveal-delay-5 { transition-delay: 0.5s; }
+
+  /* ── NAV DOTS ── */
+  .scroll-dots {
+    position: fixed; right: 16px; top: 50%; transform: translateY(-50%);
+    display: flex; flex-direction: column; gap: 8px; z-index: 100;
+  }
+  .scroll-dot {
+    width: 5px; height: 5px; border-radius: 50%; background: var(--gold-light);
+    opacity: 0.4; transition: all 0.3s ease; cursor: pointer;
+  }
+  .scroll-dot.active { opacity: 1; background: var(--gold); transform: scale(1.4); }
+</style>
+</head>
+<body>
+
+<nav class="scroll-dots">
+  <div class="scroll-dot active" data-index="0"></div>
+  <div class="scroll-dot" data-index="1"></div>
+  <div class="scroll-dot" data-index="2"></div>
+  <div class="scroll-dot" data-index="3"></div>
+  <div class="scroll-dot" data-index="4"></div>
+  <div class="scroll-dot" data-index="5"></div>
+</nav>
+
+<div class="scroll-container" id="scrollContainer">
+
+  <!-- CARD 1 — LANDING -->
+  <section class="card" id="card-landing">
+    <div class="landing-bg"></div>
+    <div class="corner corner-tl"><svg viewBox="0 0 60 60" fill="none"><path d="M2 58L2 2L58 2" stroke="#b8956a" stroke-width="1"/><path d="M2 30C2 14 14 2 30 2" stroke="#b8956a" stroke-width="0.5"/><circle cx="2" cy="2" r="2" fill="#b8956a"/></svg></div>
+    <div class="corner corner-tr"><svg viewBox="0 0 60 60" fill="none"><path d="M2 58L2 2L58 2" stroke="#b8956a" stroke-width="1"/><path d="M2 30C2 14 14 2 30 2" stroke="#b8956a" stroke-width="0.5"/><circle cx="2" cy="2" r="2" fill="#b8956a"/></svg></div>
+    <div class="corner corner-bl"><svg viewBox="0 0 60 60" fill="none"><path d="M2 58L2 2L58 2" stroke="#b8956a" stroke-width="1"/><path d="M2 30C2 14 14 2 30 2" stroke="#b8956a" stroke-width="0.5"/><circle cx="2" cy="2" r="2" fill="#b8956a"/></svg></div>
+    <div class="corner corner-br"><svg viewBox="0 0 60 60" fill="none"><path d="M2 58L2 2L58 2" stroke="#b8956a" stroke-width="1"/><path d="M2 30C2 14 14 2 30 2" stroke="#b8956a" stroke-width="0.5"/><circle cx="2" cy="2" r="2" fill="#b8956a"/></svg></div>
+    <div class="landing-content">
+      <div class="landing-eyebrow">Vi skal giftes!</div>
+      <div class="landing-names">
+        <em>Simone</em>
+        <span class="ampersand">&amp;</span>
+        <em>Lasse</em>
+      </div>
+      <div class="divider" style="max-width:160px;margin:16px auto;">
+        <div class="divider-line"></div><div class="divider-diamond"></div><div class="divider-line"></div>
+      </div>
+      <div class="landing-date">08 · 08 · 2026</div>
+    </div>
+    <div class="tap-hint">
+      Tap to open
+      <svg class="tap-arrow" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#b8956a" stroke-width="1.5">
+        <path d="M12 5v14M5 12l7 7 7-7"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- CARD 2 — PHOTO -->
+  <section class="card" id="card-photo">
+    <div class="photo-bg"></div>
+    <div class="photo-content">
+      <div class="photo-eyebrow reveal">Vi skal giftes!</div>
+      <div class="photo-names reveal reveal-delay-1"><em>Simone</em> &amp; <em>Lasse</em></div>
+      <div class="reveal reveal-delay-2" style="display:flex;justify-content:center;margin-top:16px;">
+        <div class="photo-date-block">
+          <span>Lørdag</span><div class="dot"></div>
+          <span>8th August 2026</span><div class="dot"></div>
+          <span>Aarhus</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CARD 3 — COUNTDOWN -->
+  <section class="card" id="card-countdown">
+    <div class="countdown-bg"></div>
+    <div class="countdown-label reveal">Counting down to forever</div>
+    <div class="countdown-grid">
+      <div class="count-cell reveal reveal-delay-1">
+        <div class="count-number" id="cd-days">000</div>
+        <div class="count-unit">Days</div>
+      </div>
+      <div class="count-cell reveal reveal-delay-2">
+        <div class="count-number" id="cd-hours">00</div>
+        <div class="count-unit">Hours</div>
+      </div>
+      <div class="count-cell reveal reveal-delay-3">
+        <div class="count-number" id="cd-minutes">00</div>
+        <div class="count-unit">Minutes</div>
+      </div>
+      <div class="count-cell reveal reveal-delay-4">
+        <div class="count-number" id="cd-seconds">00</div>
+        <div class="count-unit">Seconds</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CARD 4 — LOCATION -->
+  <section class="card" id="card-location">
+    <div class="location-bg"></div>
+    <div class="card-inner">
+      <div class="section-eyebrow reveal">Hvor sker det?</div>
+      <div class="section-title reveal reveal-delay-1">Lokationer</div>
+      <div class="divider reveal reveal-delay-1"><div class="divider-line"></div><div class="divider-diamond"></div><div class="divider-line"></div></div>
+      <div class="location-card reveal reveal-delay-2">
+        <div class="loc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#b8956a" stroke-width="1.5">
+            <path d="M12 2v4M10 4h4M3 10h18M5 10v10h14V10M9 20v-6h6v6M12 6l-7 4M12 6l7 4"/>
+          </svg>
+        </div>
+        <div class="loc-info">
+          <h3>Vejlby Kirke</h3>
+          <p>Bredkildegade 5, 8240 Risskov<br>Vielse · 14:30</p>
+          <a href="https://maps.google.com/?q=Vejlby+Kirke+Aarhus" target="_blank" class="nav-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Find vej
+          </a>
+        </div>
+      </div>
+      <div class="location-card reveal reveal-delay-3">
+        <div class="loc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#b8956a" stroke-width="1.5">
+            <rect x="2" y="7" width="20" height="14" rx="2"/>
+            <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
+            <line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/>
+          </svg>
+        </div>
+        <div class="loc-info">
+          <h3>Studie Köter  </h3>
+          <p>Sindalsvej 31, 8240 Risskov<br>Reception · 16:00</p>
+          <a href="https://maps.app.goo.gl/ahtRQjXq77iBdov17" target="_blank" class="nav-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Find vej
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CARD 5 — PROGRAM -->
+  <section class="card" id="card-program">
+    <div class="program-bg"></div>
+    <div class="card-inner">
+      <div class="section-title reveal reveal-delay-1">Program</div>
+      <div class="divider reveal reveal-delay-1"><div class="divider-line"></div><div class="divider-diamond"></div><div class="divider-line"></div></div>
+      <div class="program-list reveal reveal-delay-2">
+        <div class="program-item">
+          <div class="prog-dot"></div>
+          <div class="prog-content">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div class="prog-event">Ankomst</div>
+              <div class="prog-time">14:15</div>
+            </div>
+            <div class="prog-note">Dørene åbner</div>
+          </div>
+        </div>
+        <div class="program-item">
+          <div class="prog-dot main"></div>
+          <div class="prog-content">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div class="prog-event">Vielsen</div>
+              <div class="prog-time">14:30</div>
+            </div>
+            <div class="prog-note">Exchange of vows &amp; rings</div>
+          </div>
+        </div>
+        <div class="program-item">
+          <div class="prog-dot"></div>
+          <div class="prog-content">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div class="prog-event">Billeder</div>
+              <div class="prog-time">15:30</div>
+            </div>
+            <div class="prog-note">Udenfor kirken</div>
+          </div>
+        </div>
+        <div class="program-item">
+          <div class="prog-dot main"></div>
+          <div class="prog-content">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div class="prog-event">Velkomst &amp; Bobler</div>
+              <div class="prog-time">16:00</div>
+            </div>
+            <div class="prog-note">Studie Köter — Velkomst &amp drinks</div>
+          </div>
+        </div>
+        <div class="program-item">
+          <div class="prog-dot"></div>
+          <div class="prog-content">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div class="prog-event">Middag &amp; Taler</div>
+              <div class="prog-time">18:30</div>
+            </div>
+            <div class="prog-note">Alt godt fra grillen</div>
+          </div>
+        </div>
+        <div class="program-item">
+          <div class="prog-dot"></div>
+          <div class="prog-content">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div class="prog-event">Dans &amp; fest!</div>
+              <div class="prog-time">21:00</div>
+            </div>
+            <div class="prog-note">Vi fester til kl. sent!</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CARD 6 — FAQ -->
+  <section class="card" id="card-qa">
+    <div class="qa-bg"></div>
+    <div class="card-inner">
+      <div class="section-eyebrow reveal">Good to know</div>
+      <div class="section-title reveal reveal-delay-1">FAQ</div>
+      <div class="divider reveal reveal-delay-1"><div class="divider-line"></div><div class="divider-diamond"></div><div class="divider-line"></div></div>
+      <div class="qa-list">
+        <div class="qa-item reveal reveal-delay-2">
+          <div class="qa-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#b8956a" stroke-width="1.5">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+          </div>
+          <div class="qa-text">
+            <h4>Wedding Wishlist</h4>
+            <p>Your presence is the greatest gift. If you'd like to give something, we have a small wishlist.</p>
+            <a href="#" class="wishlist-btn">View wishlist →</a>
+          </div>
+        </div>
+        <div class="qa-item reveal reveal-delay-3">
+          <div class="qa-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#b8956a" stroke-width="1.5">
+              <rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/>
+              <circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
+            </svg>
+          </div>
+          <div class="qa-text">
+            <h4>Parking</h4>
+            <p>Free parking at the church. At Villa Marienlyst, use the main car park off Strandvejen — ample space for all guests.</p>
+          </div>
+        </div>
+        <div class="qa-item reveal reveal-delay-4">
+          <div class="qa-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#b8956a" stroke-width="1.5">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+          </div>
+          <div class="qa-text">
+            <h4>Children</h4>
+            <p>Little ones are very welcome! We'll have a dedicated kids' corner with activities at the reception.</p>
+          </div>
+        </div>
+        <div class="qa-item reveal reveal-delay-5">
+          <div class="qa-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#b8956a" stroke-width="1.5">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+          </div>
+          <div class="qa-text">
+            <h4>RSVP by 1st July 2026</h4>
+            <p>Please confirm by emailing <span style="color:var(--gold)">sofia.james@wedding.dk</span> — dietary requirements welcome.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- end scroll-container -->
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+  var scrollContainer = document.getElementById('scrollContainer');
+  var cards = Array.from(document.querySelectorAll('.card'));
+  var dots  = Array.from(document.querySelectorAll('.scroll-dot'));
+
+  function scrollToCard(i) {
+    cards[i].scrollIntoView({ behavior: 'smooth' });
+  }
+
+  // Nav dot clicks
+  dots.forEach(function (dot) {
+    dot.addEventListener('click', function () {
+      scrollToCard(parseInt(dot.dataset.index, 10));
+    });
+  });
+
+  // Landing tap: ripple + advance
+  document.getElementById('card-landing').addEventListener('click', function (e) {
+    var ripple = document.createElement('div');
+    ripple.className = 'ripple';
+    ripple.style.left = e.clientX + 'px';
+    ripple.style.top  = e.clientY + 'px';
+    this.appendChild(ripple);
+    setTimeout(function () { ripple.remove(); }, 900);
+    setTimeout(function () { scrollToCard(1); }, 400);
+  });
+
+  // IntersectionObserver: update dots + trigger reveals
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      var idx = cards.indexOf(entry.target);
+      dots.forEach(function (d) { d.classList.remove('active'); });
+      if (dots[idx]) dots[idx].classList.add('active');
+      entry.target.querySelectorAll('.reveal').forEach(function (el) {
+        el.classList.add('visible');
+      });
+    });
+  }, { threshold: 0.5, root: scrollContainer });
+
+  cards.forEach(function (c) { io.observe(c); });
+
+  // Immediately reveal first card
+  cards[0].querySelectorAll('.reveal').forEach(function (el) { el.classList.add('visible'); });
+
+  // Countdown
+  var target = new Date('2026-08-08T14:30:00');
+  function pad(n, l) { return String(n).padStart(l, '0'); }
+  function tick() {
+    var diff = target - Date.now();
+    if (diff < 0) diff = 0;
+    document.getElementById('cd-days').textContent    = pad(Math.floor(diff / 86400000), 3);
+    document.getElementById('cd-hours').textContent   = pad(Math.floor(diff % 86400000 / 3600000), 2);
+    document.getElementById('cd-minutes').textContent = pad(Math.floor(diff % 3600000 / 60000), 2);
+    document.getElementById('cd-seconds').textContent = pad(Math.floor(diff % 60000 / 1000), 2);
+  }
+  tick();
+  setInterval(tick, 1000);
+
+});
+</script>
+</body>
+</html>
