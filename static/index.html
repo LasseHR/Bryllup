@@ -16,6 +16,7 @@
     --beige-3: #e2d0b8;
     --gold: #b8956a;
     --gold-light: #d4b896;
+    --gold-dark: #706245;
     --gold-pale: #ecdfc8;
     --dark: #3a2e26;
     --mid: #7a6555;
@@ -70,8 +71,8 @@
   .landing-content { position: relative; text-align: center; padding: 40px 32px; animation: fadeUp 1.2s ease both; }
 
   .landing-eyebrow {
-    font-family: var(--sans); font-weight: 200; font-size: 10px;
-    letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px;
+    font-family: var(--serif); font-weight: 400; font-size: 14px;
+    letter-spacing: 0.35em; text-transform: uppercase; color: var(--mid); margin-bottom: 20px;
   }
   .landing-names {
     font-family: var(--serif); font-size: clamp(52px, 16vw, 88px);
@@ -115,7 +116,7 @@
     margin-top: auto; padding-bottom: 52px; width: 100%;
   }
   .photo-eyebrow {
-    font-family: var(--sans); font-weight: 200; font-size: 9px;
+    font-family: var(--serif); font-weight: 400; font-size: 14px;
     letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 12px;
   }
   .photo-names {
@@ -144,9 +145,9 @@
       url('20250120_164352.jpg') center/cover no-repeat;
   }
   .countdown-label {
-    font-family: var(--sans); font-weight: 200; font-size: 10px;
-    letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold);
-    margin-bottom: 32px; position: relative;
+    font-family: var(--serif); font-weight: 500; font-size: 20px;
+    letter-spacing: 0.35em; text-transform: uppercase; color: var(--mid);
+    margin-bottom: 70px; position: relative;
   }
   .countdown-grid {
     display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
@@ -158,9 +159,23 @@
     box-shadow: 0 4px 24px rgba(184,149,106,0.08);
     aspect-ratio: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
   }
+
   .count-number {
-    font-family: var(--serif); font-size: clamp(44px, 14vw, 64px);
-    font-weight: 300; color: var(--dark); line-height: 1; letter-spacing: -0.02em;
+    font-family: var(--serif);
+    font-size: clamp(44px, 14vw, 64px);
+    font-weight: 300;
+    color: var(--dark);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+
+    /* Fix uneven digit sizing */
+    font-feature-settings: "tnum" 1, "lnum" 1;  /* tabular + lining numerals */
+    font-variant-numeric: tabular-nums lining-nums;
+    font-variant-alternates: normal;
+    min-width: 2ch;                              /* reserve consistent width */
+    display: inline-block;
+    text-align: center;
   }
   .count-unit {
     font-family: var(--sans); font-weight: 200; font-size: 9px;
@@ -179,7 +194,7 @@
     padding: 0 24px; display: flex; flex-direction: column; gap: 14px;
   }
   .section-eyebrow {
-    font-family: var(--sans); font-weight: 200; font-size: 10px;
+    font-family: var(--serif); font-weight: 400; font-size: 14px;
     letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); text-align: center;
   }
   .section-title {
@@ -230,13 +245,128 @@
     border-radius: 14px; padding: 8px 10px; flex: 1;
   }
   .prog-time {
-    font-family: var(--sans); font-weight: 200; font-size: 9px;
+    font-family: var(--sans); font-weight: 300; font-size: 12px;
     letter-spacing: 0.3em; color: var(--gold); text-transform: uppercase; margin-bottom: 3px;
   }
-  .prog-event { font-family: var(--serif); font-size: 16px; font-weight: 400; color: var(--dark); }
-  .prog-note  { font-family: var(--sans); font-weight: 300; font-size: 11px; color: var(--mid); margin-top: 2px; }
+  .prog-event { font-family: var(--serif); font-size: 20px; font-weight: 400; color: var(--dark); }
+  .prog-note  { font-family: var(--sans); font-weight: 300; font-size: 12px; color: var(--mid); margin-top: 2px; }
+  /* ── CARD 6: Happenings ── */
+  /* ── HAPPENINGS CARD ── */
+  #card-happenings { background: var(--beige-3); }
 
-  /* ── CARD 6: FAQ ── */
+  .happenings-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 75% 55% at 20% 10%, rgba(212,184,150,0.22) 0%, transparent 65%),
+      radial-gradient(ellipse 50% 45% at 85% 85%, rgba(184,149,106,0.14) 0%, transparent 55%);
+  }
+
+  /* Intro blurb */
+  .happenings-intro {
+    background: rgba(255,255,255,0.55);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(184,149,106,0.2);
+    border-radius: 20px;
+    padding: 18px 20px;
+    text-align: center;
+  }
+  .happenings-intro p {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(20px, 4vw, 18px);
+    font-weight: 300;
+    color: var(--dark);
+    line-height: 1.65;
+  }
+  .happenings-intro p em {
+    color: var(--gold);
+    font-style: normal;
+  }
+
+  /* Two-column nudge tiles */
+  .happenings-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .happening-tile {
+    background: rgba(255,255,255,0.6);
+    border: 1px solid rgba(184,149,106,0.18);
+    border-radius: 18px;
+    padding: 16px 14px 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 8px;
+  }
+
+  .happening-tile.yes { border-color: rgba(184,149,106,0.35); }
+  .happening-tile.no  { opacity: 0.82; }
+
+  .tile-icon {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .tile-icon.green { background: rgba(184,149,106,0.18); }
+  .tile-icon.muted { background: rgba(122,101,85,0.1); }
+  .tile-icon svg { width: 18px; height: 18px; }
+
+  .tile-label {
+    font-family: var(--sans);
+    font-weight: 200;
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .tile-label.no-label { color: var(--mid); }
+
+  .tile-text {
+    font-family: var(--serif);
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--dark);
+    line-height: 1.35;
+  }
+
+  /* CTA strip */
+  .happenings-cta {
+    background: var(--dark);
+    border-radius: 18px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .cta-icon {
+    width: 36px; height: 36px;
+    background: rgba(212,184,150,0.15);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .cta-icon svg { width: 16px; height: 16px; }
+  .cta-text {
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 12px;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.55;
+  }
+  .cta-text strong {
+    display: block;
+    font-family: var(--serif);
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--gold-light);
+    margin-bottom: 2px;
+  }
+
+  /* ── CARD 7: FAQ ── */
   #card-qa { background: var(--beige-0); }
   .qa-bg {
     position: absolute; inset: 0;
@@ -275,6 +405,7 @@
   .reveal-delay-3 { transition-delay: 0.3s; }
   .reveal-delay-4 { transition-delay: 0.4s; }
   .reveal-delay-5 { transition-delay: 0.5s; }
+  .reveal-delay-6 { transition-delay: 0.6s; }
 
   /* ── NAV DOTS ── */
   .scroll-dots {
@@ -309,7 +440,7 @@
     <div class="corner corner-bl"><svg viewBox="0 0 60 60" fill="none"><path d="M2 58L2 2L58 2" stroke="#b8956a" stroke-width="1"/><path d="M2 30C2 14 14 2 30 2" stroke="#b8956a" stroke-width="0.5"/><circle cx="2" cy="2" r="2" fill="#b8956a"/></svg></div>
     <div class="corner corner-br"><svg viewBox="0 0 60 60" fill="none"><path d="M2 58L2 2L58 2" stroke="#b8956a" stroke-width="1"/><path d="M2 30C2 14 14 2 30 2" stroke="#b8956a" stroke-width="0.5"/><circle cx="2" cy="2" r="2" fill="#b8956a"/></svg></div>
     <div class="landing-content">
-      <div class="landing-eyebrow">Vi skal giftes!</div>
+      <div class="landing-eyebrow">Du/I inviteres til bryllup</div>
       <div class="landing-names">
         <em>Simone</em>
         <span class="ampersand">&amp;</span>
@@ -337,7 +468,7 @@
       <div class="reveal reveal-delay-2" style="display:flex;justify-content:center;margin-top:16px;">
         <div class="photo-date-block">
           <span>Lørdag</span><div class="dot"></div>
-          <span>8th August 2026</span><div class="dot"></div>
+          <span>8. august 2026</span><div class="dot"></div>
           <span>Aarhus</span>
         </div>
       </div>
@@ -400,7 +531,7 @@
         </div>
         <div class="loc-info">
           <h3>Studie Köter  </h3>
-          <p>Sindalsvej 31, 8240 Risskov<br>Reception · 16:00</p>
+          <p>Sindalsvej 31, 8240 Risskov<br>Fest · 16:00</p>
           <a href="https://maps.app.goo.gl/ahtRQjXq77iBdov17" target="_blank" class="nav-btn">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
             Find vej
@@ -442,7 +573,7 @@
           <div class="prog-dot"></div>
           <div class="prog-content">
             <div style="display:flex;justify-content:space-between;align-items:center">
-              <div class="prog-event">Billeder udenfor kirken</div>
+              <div class="prog-event">Billeder foran kirken</div>
               <div class="prog-time">15:30</div>
             </div>
           </div>
@@ -515,8 +646,43 @@
       </div>
     </div>
   </section>
+  <!-- ═══════════════════════════════════════════════════════
+     HAPPENINGS CARD
+     Insert this <section> block into the main invitation
+     between card-program and card-qa (or wherever fits).
+  ═══════════════════════════════════════════════════════ -->
+  <section class="card" id="card-happenings">
+    <div class="happenings-bg"></div>
+    <div class="card-inner">
+      <div class="section-title reveal reveal-delay-1">Indslag</div>
+      <div class="divider reveal reveal-delay-1">
+        <div class="divider-line"></div><div class="divider-diamond"></div><div class="divider-line"></div>
+      </div>
 
-  <!-- CARD 6 — FAQ -->
+      <!-- Intro -->
+      <div class="happenings-intro reveal reveal-delay-2">
+        <p>Har man ideer til sange, leje eller andre sjove indslag er man mere end velkommen til at arrangere det.
+           Man er også velkommen til at holde en tale så længe det kan gøres enten kort eller underholdende.</p>
+      </div>
+
+      <div class="qa-item reveal reveal-delay-4">
+        <div class="qa-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#b8956a" stroke-width="1.5">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </div>
+        <div class="tile-text">
+          <h4>Toastmaster</h4>
+          <p>Rune er toastmaster og styre slagets gang.</p>
+          <p>Tlf.:<span style="color:var(--gold)">30298862</span> E-mail.:<span style="color:var(--gold)">Rune@gmail.com</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CARD 7 — FAQ -->
   <section class="card" id="card-qa">
     <div class="qa-bg"></div>
     <div class="card-inner">
@@ -531,7 +697,7 @@
           </div>
           <div class="qa-text">
             <h4>Ønsker</h4>
-            <p>Vi samlet vores ønsker i en ønskesky</p>
+            <p>Vi har samlet vores ønsker i en ønskesky</p>
             <a href="https://onskeskyen.dk/s/en34af" target="_blank" rel="noopener noreferrer" class="wishlist-btn">Se ønskeskyen →</a>
           </div>
         </div>
@@ -545,20 +711,6 @@
           <div class="qa-text">
             <h4>Parkering</h4>
             <p>Der er gratis parkering ved kirken og ved Studie Köter.</p>
-          </div>
-        </div>
-        <div class="qa-item reveal reveal-delay-4">
-          <div class="qa-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#b8956a" stroke-width="1.5">
-              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-              <circle cx="9" cy="7" r="4"/>
-              <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
-            </svg>
-          </div>
-          <div class="qa-text">
-            <h4>Toastmaster</h4>
-            <p>Rune er toastmaster og styre slagets gang.</p>
-            <p>Tlf.:<span style="color:var(--gold)">30298862</span> E-mail.:<span style="color:var(--gold)">Rune@gmail.com</span></p>
           </div>
         </div>
         <div class="qa-item reveal reveal-delay-5">
@@ -581,7 +733,7 @@
           </div>
           <div class="qa-text">
             <h4>Allergener</h4>
-            <p>Man må meget gerne kontakte os angående kostbehov og allergener</p>
+            <p>Kontakt os gerne angående kostbehov og allergener</p>
           </div>
         </div>
         <div class="qa-item reveal reveal-delay-6">
@@ -592,7 +744,7 @@
             </svg>
           </div>
           <div class="qa-text">
-            <h4>SU senest 1. Juni 2026</h4>
+            <h4>SU senest 8. Juni 2026</h4>
             <p>Lasse: <span style="color:var(--gold)">30298862</span></p>
             <p>Simone: <span style="color:var(--gold)">60498246</span></p>
           </div>
